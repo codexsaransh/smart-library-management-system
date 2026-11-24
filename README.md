@@ -8,27 +8,43 @@ Developed for **B.Tech Information Technology (Semester III)** coursework under 
 
 ## Key Highlights & Core DSA Implementations
 
-1. **Singly Linked Lists (`malloc()` / `free()`)**:
-   - Dynamic in-memory allocation for Books, Registered Students, and Active Borrowing Records.
-   - Eliminates static array size boundaries; scales dynamically with zero memory waste.
-   - Clean deletion and list traversal routines with verified heap deallocation.
+### 1. Singly Linked Lists (`malloc()` / `free()`)
+- Dynamic in-memory allocation for Books, Registered Students, and Active Borrowing Records.
+- Eliminates static array size boundaries; scales dynamically with zero memory waste.
+- Clean deletion and list traversal routines with verified heap deallocation.
 
-2. **FIFO Queue-Based Fair Reservation Engine**:
-   - Each `Book` node encapsulates its own independent `Queue` structure equipped with `front`, `rear`, and `count` pointers.
-   - Guarantees $O(1)$ Enqueue and Dequeue operations.
-   - **Automated Waitlist Dispatch**: When an issued book is returned or inventory is augmented, the system automatically dispatches the available copy to the student at the front of that specific book's queue.
+<p align="center">
+  <img src="screenshots/screenshot_structures.png" width="720" alt="Core Data Structures in library.c" />
+</p>
 
-3. **Linear Search**:
-   - Supports search by unique Book ID ($O(1)$ best, $O(n)$ worst) and case-insensitive partial substring title search.
-   - Internal linear lookup ensures duplicate prevention for Book IDs, Student IDs, and multiple copies loaned to the same student.
+### 2. FIFO Queue-Based Fair Reservation Engine
+- Each `Book` node encapsulates its own independent `Queue` structure equipped with `front`, `rear`, and `count` pointers.
+- Guarantees $O(1)$ Enqueue and Dequeue operations.
+- **Automated Waitlist Dispatch**: When an issued book is returned or inventory is augmented, the system automatically dispatches the available copy to the student at the front of that specific book's queue.
 
-4. **In-Place Bubble Sort on Linked Nodes**:
-   - Orders the book collection by Book ID.
-   - Swaps node data fields in-place while keeping pointer connections intact. Includes early-termination flag (`swapped`) achieving $O(n)$ best-case runtime.
+<p align="center">
+  <img src="screenshots/screenshot_queue_ops.png" width="720" alt="Enqueue and Dequeue Operations in library.c" />
+</p>
 
-5. **Crash-Resilient File Persistence**:
-   - Employs atomic write operations via temporary swap files (`books.tmp -> books.txt`), ensuring file integrity even in unexpected aborts.
-   - Formats data with pipe-separated delimiters (`|`), preserving titles and names containing spaces.
+### 3. Linear Search
+- Supports search by unique Book ID ($O(1)$ best, $O(n)$ worst) and case-insensitive partial substring title search.
+- Internal linear lookup ensures duplicate prevention for Book IDs, Student IDs, and multiple copies loaned to the same student.
+
+### 4. In-Place Bubble Sort on Linked Nodes
+- Orders the book collection by Book ID.
+- Swaps node data fields in-place while keeping pointer connections intact. Includes early-termination flag (`swapped`) achieving $O(n)$ best-case runtime.
+
+<p align="center">
+  <img src="screenshots/screenshot_bubble_sort.png" width="720" alt="In-Place Bubble Sort on Linked Nodes in library.c" />
+</p>
+
+### 5. Automated Waitlist Dispatch & Crash-Resilient Persistence
+- Employs atomic write operations via temporary swap files (`books.tmp -> books.txt`), ensuring file integrity even in unexpected aborts.
+- Formats data with pipe-separated delimiters (`|`), preserving titles and names containing spaces.
+
+<p align="center">
+  <img src="screenshots/screenshot_auto_dispatch.png" width="720" alt="Automated Reservation Dispatch in library.c" />
+</p>
 
 ---
 
