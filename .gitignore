@@ -1,0 +1,15 @@
+# Binaries
+*.exe
+*.o
+*.obj
+library
+
+# Temporary and swap files
+*.tmp
+*.bak
+*~
+
+# IDE configurations
+.vscode/
+.idea/
+*.swp
