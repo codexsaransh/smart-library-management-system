@@ -20,6 +20,17 @@ Developed by **Palak Rathore**, **Niharika**, and **Saransh** for the **Data Str
 
 ---
 
+## Quick Navigation & Code Access
+
+| Resource | Path / Direct Link | Description |
+| :--- | :--- | :--- |
+| 💻 **Complete C Source Code** | [**`library.c`**](https://github.com/codexsaransh/smart-library-management-system/blob/main/library.c) | 430 lines, single-file standard C99 (`gcc -std=c99 library.c -o library`) |
+| 🛠️ **Cross-Platform Makefile** | [**`Makefile`**](Makefile) | GNU make automation (`make`, `make run`, `make clean`) |
+| ⚡ **Windows Build Script** | [**`build.bat`**](build.bat) | Batch compilation and launcher for Windows Command Prompt/PowerShell |
+| 🖼️ **Code Snapshots** | [**`screenshots/`**](screenshots/) | Syntax-highlighted code logic snapshots embedded in academic report |
+
+---
+
 ## Core Data Structures & Concepts Implemented
 
 ### 1. Singly Linked Lists (`malloc()` / `free()`)
