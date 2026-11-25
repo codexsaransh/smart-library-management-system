@@ -1,4 +1,0 @@
-101|Data Structures|Mark Weiss|Computer Science|3|3
-102|DBMS|Korth|Databases|2|2
-103|Operating Systems|Galvin|Computer Science|4|4
-104|Computer Networks|Tanenbaum|Networking|2|2

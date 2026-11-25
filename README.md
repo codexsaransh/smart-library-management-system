@@ -1,49 +1,59 @@
-# Smart Library Management System Using Data Structures & Algorithms in C
+# Smart Library Management System Using Data Structures in C
 
-A modular, console-based library automation system written in standard C (C99), demonstrating practical implementations of fundamental Data Structures and Algorithms (DSA) including Singly Linked Lists, First-In-First-Out (FIFO) Queues, Linear Search, and Bubble Sort, alongside atomic text-file persistence.
+A modular, console-based library automation system written in standard C, demonstrating practical implementations of fundamental Data Structures and Algorithms (DSA) including Singly Linked Lists, First-In-First-Out (FIFO) Queues, Linear Search, and Bubble Sort.
 
-Developed for **B.Tech Information Technology (Semester III)** coursework under **Guru Gobind Singh Indraprastha University (GGSIPU)**.
+Developed by **Palak Rathore**, **Niharika**, and **Saransh** for the **Data Structures (Semester III, IT Evening)** coursework at **Maharaja Surajmal Institute of Technology (MSIT)**, affiliated with **Guru Gobind Singh Indraprastha University (GGSIPU)**, under the guidance of **Dr. Sunesh Malik**.
 
 ---
 
-## Key Highlights & Core DSA Implementations
+## Academic Information
+
+- **Institute**: Maharaja Surajmal Institute of Technology, C-4 Janak Puri, New Delhi-110058
+- **Subject**: Data Structures (ETIT-205)
+- **Course**: B.Tech Information Technology, Semester III (IT Evening)
+- **Academic Session**: 2025–2029
+- **Project Guide**: Dr. Sunesh Malik, Department of Information Technology
+- **Project Team**:
+  - **Palak Rathore** — Enrollment No.: `04196303125`
+  - **Niharika** — Enrollment No.: `01996303125`
+  - **Saransh** — Enrollment No.: `04796303125`
+
+---
+
+## Core Data Structures & Concepts Implemented
 
 ### 1. Singly Linked Lists (`malloc()` / `free()`)
-- Dynamic in-memory allocation for Books, Registered Students, and Active Borrowing Records.
-- Eliminates static array size boundaries; scales dynamically with zero memory waste.
-- Clean deletion and list traversal routines with verified heap deallocation.
+- Dynamic heap allocation for Book catalog, Registered Students, and Active Loan transactions.
+- Eliminates fixed array capacity boundaries; consumes memory only when records exist.
+- Clean traversal and unlinking routines with complete heap deallocation via `freeAll()` at exit.
 
 <p align="center">
-  <img src="screenshots/screenshot_structures.png" width="720" alt="Core Data Structures in library.c" />
+  <img src="screenshots/screenshot_structures.png" width="750" alt="Core Data Structures in library.c" />
 </p>
 
-### 2. FIFO Queue-Based Fair Reservation Engine
-- Each `Book` node encapsulates its own independent `Queue` structure equipped with `front`, `rear`, and `count` pointers.
+### 2. Fair FIFO Reservation Engine (Queue per Book)
+- Each `Book` node encapsulates its own independent `Queue` structure with `front` and `rear` pointers.
 - Guarantees $O(1)$ Enqueue and Dequeue operations.
-- **Automated Waitlist Dispatch**: When an issued book is returned or inventory is augmented, the system automatically dispatches the available copy to the student at the front of that specific book's queue.
+- **Automated Waitlist Dispatch (`processReservations`)**: When an issued book is returned, the system automatically checks that book's waiting queue, dequeues the student who requested it first, and re-issues the copy immediately.
 
 <p align="center">
-  <img src="screenshots/screenshot_queue_ops.png" width="720" alt="Enqueue and Dequeue Operations in library.c" />
+  <img src="screenshots/screenshot_queue_dispatch.png" width="750" alt="Queue Operations and Automated Reservation Dispatch" />
 </p>
 
-### 3. Linear Search
-- Supports search by unique Book ID ($O(1)$ best, $O(n)$ worst) and case-insensitive partial substring title search.
-- Internal linear lookup ensures duplicate prevention for Book IDs, Student IDs, and multiple copies loaned to the same student.
+### 3. Circulation Management (Issue & Return)
+- Validates student registration and book availability before issuing.
+- Decrements and increments availability counters in synchronized balance.
+
+<p align="center">
+  <img src="screenshots/screenshot_issue_return.png" width="750" alt="Book Issue and Return Modules" />
+</p>
 
 ### 4. In-Place Bubble Sort on Linked Nodes
-- Orders the book collection by Book ID.
-- Swaps node data fields in-place while keeping pointer connections intact. Includes early-termination flag (`swapped`) achieving $O(n)$ best-case runtime.
+- Orders the book catalog in ascending order of Book ID.
+- Swaps node data in-place while keeping pointer connections intact, complete with early-termination flag (`swapped`).
 
 <p align="center">
-  <img src="screenshots/screenshot_bubble_sort.png" width="720" alt="In-Place Bubble Sort on Linked Nodes in library.c" />
-</p>
-
-### 5. Automated Waitlist Dispatch & Crash-Resilient Persistence
-- Employs atomic write operations via temporary swap files (`books.tmp -> books.txt`), ensuring file integrity even in unexpected aborts.
-- Formats data with pipe-separated delimiters (`|`), preserving titles and names containing spaces.
-
-<p align="center">
-  <img src="screenshots/screenshot_auto_dispatch.png" width="720" alt="Automated Reservation Dispatch in library.c" />
+  <img src="screenshots/screenshot_bubble_sort.png" width="750" alt="Bubble Sort on Linked Nodes" />
 </p>
 
 ---
@@ -52,13 +62,14 @@ Developed for **B.Tech Information Technology (Semester III)** coursework under 
 
 ```text
 smart-library-management-system/
-├── library.c              # Integrated C implementation (~1,300 lines)
+├── library.c              # Complete C source implementation (~430 lines)
 ├── Makefile               # Cross-platform build script
 ├── build.bat              # Windows compilation & run script
-├── books.txt              # Persistent book records
-├── students.txt           # Persistent registered student records
-├── issued_books.txt       # Active loan records
-├── reservations.txt       # Active waitlist reservation queues
+├── screenshots/           # Code implementation snapshots
+│   ├── screenshot_structures.png
+│   ├── screenshot_queue_dispatch.png
+│   ├── screenshot_issue_return.png
+│   └── screenshot_bubble_sort.png
 ├── .gitignore             # Ignored compilation binaries & swap files
 └── README.md              # Project documentation
 ```
@@ -69,15 +80,15 @@ smart-library-management-system/
 
 ### Prerequisites
 - GCC / Clang / MinGW C compiler (supporting C99 or later).
-- Standard C libraries: `<stdio.h>`, `<stdlib.h>`, `<string.h>`.
+- Standard C headers: `<stdio.h>`, `<stdlib.h>`, `<string.h>`.
 
 ### Compilation via GCC
 ```bash
 # Standard compilation
 gcc library.c -o library
 
-# Strict academic / warning-free flags
-gcc -Wall -Wextra -std=c99 -pedantic -O2 library.c -o library
+# Academic warning-free compilation
+gcc -Wall -Wextra -std=c99 -pedantic library.c -o library
 ```
 
 ### Running the System
@@ -96,38 +107,41 @@ gcc -Wall -Wextra -std=c99 -pedantic -O2 library.c -o library
 
 ---
 
-## Complexity Matrix
-
-| Operation | DSA Concept | Time Complexity (Best / Avg / Worst) | Space Complexity |
-| :--- | :--- | :--- | :--- |
-| **Add Book / Student** | Linked List Insertion | $O(1) \text{ / } O(n) \text{ / } O(n)$ | $O(1)$ |
-| **Search by Book ID** | Linear Search | $O(1) \text{ / } O(n) \text{ / } O(n)$ | $O(1)$ |
-| **Search by Title** | Substring Linear Scan | $O(n) \text{ / } O(n) \text{ / } O(n)$ | $O(1)$ |
-| **Sort Books by ID** | In-Place Bubble Sort | $O(n) \text{ / } O(n^2) \text{ / } O(n^2)$ | $O(1)$ |
-| **Enqueue Reservation** | FIFO Queue Insertion | $O(1) \text{ / } O(1) \text{ / } O(1)$ | $O(1)$ |
-| **Dequeue & Auto-Issue** | FIFO Queue Dequeue | $O(1) \text{ / } O(1) \text{ / } O(1)$ | $O(1)$ |
-| **Persistence Sync** | File Stream I/O | $O(n) \text{ / } O(n) \text{ / } O(n)$ | $O(1)$ |
-
----
-
 ## Menu Options
 
-1. **Add New Book**: Dynamic addition with validation.
-2. **Display All Books**: Full tabular inventory view.
-3. **Search Book**: Fast lookup by ID or title substring.
-4. **Issue Book**: Availability check, loan validation, copy deduction.
-5. **Return Book**: Record unlinking, copy increment, automated FIFO waitlist fulfillment.
-6. **Reserve Book**: Queues waiting student if zero copies remain.
-7. **Add Student**: Member onboarding with duplicate ID filtering.
-8. **Display Student Records**: Lists all active student registrations.
-9. **Sort Books by ID**: Bubble sort ordering with pass-by-pass telemetry.
-10. **View Issued Books**: Real-time tracking of loaned titles and borrowers.
-11. **View Reservation Waiting List**: Per-book queue inspection from front to rear.
-12. **Exit**: Flushes all buffers to disk, cleanly frees allocated heap nodes, and exits.
-13. **Update Book Details**: Inventory and metadata management.
-14. **Delete Book**: Guarded deletion (blocked if copies are currently checked out).
+```text
+==========================================
+     SMART LIBRARY MANAGEMENT SYSTEM
+==========================================
+ 1. Add Book
+ 2. Display All Books
+ 3. Search Book
+ 4. Add Student
+ 5. Issue Book
+ 6. Return Book
+ 7. Reserve Book
+ 8. View Waiting List
+ 9. View Issued Books
+10. Sort Books by ID
+ 0. Exit
+------------------------------------------
+```
 
 ---
 
-## License & Academic Notice
-This project is developed for educational and academic evaluation purposes. Feel free to reference and adapt with appropriate academic attribution.
+## Complexity Matrix
+
+| Operation | Data Structure / Algorithm | Best Case | Average Case | Worst Case | Space |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| **Insert Book / Student** | Linked List Append | $O(1)$ | $O(n)$ | $O(n)$ | $O(1)$ |
+| **Search by Book ID** | Linear Search | $O(1)$ | $O(n)$ | $O(n)$ | $O(1)$ |
+| **Search by Title** | Substring Linear Scan | $O(n)$ | $O(n)$ | $O(n)$ | $O(1)$ |
+| **Sort Books by ID** | In-Place Bubble Sort | $O(n)$ | $O(n^2)$ | $O(n^2)$ | $O(1)$ |
+| **Reserve Book** | FIFO Queue Enqueue | $O(1)$ | $O(1)$ | $O(1)$ | $O(1)$ |
+| **Auto-Issue on Return**| FIFO Queue Dequeue | $O(1)$ | $O(1)$ | $O(1)$ | $O(1)$ |
+| **Issue / Return Book** | Search + Link Manipulation | $O(1)$ | $O(n)$ | $O(n)$ | $O(1)$ |
+
+---
+
+## License & Academic Attribution
+Developed for educational evaluation under Guru Gobind Singh Indraprastha University. Free for reference with academic attribution.
